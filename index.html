@@ -1,0 +1,1410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Abhay Cloth House</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #2874f0;
+            --primary-dark: #1c60c9;
+            --secondary: #ff9f00;
+            --light: #f1f3f6;
+            --dark: #212121;
+            --text: #444;
+            --success: #388e3c;
+            --border: #e0e0e0;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+        }
+        
+        body {
+            background-color: var(--light);
+            color: var(--text);
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        /* Header Styles */
+        .header {
+            background-color: var(--primary);
+            color: white;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        
+        .logo-image {
+            height: 50px;
+            width: auto;
+            border-radius: 5px;
+        }
+        
+        .search-bar {
+            display: flex;
+            flex: 0 0 50%;
+            max-width: 500px;
+        }
+        
+        .search-bar input {
+            flex: 1;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 2px 0 0 2px;
+            font-size: 14px;
+        }
+        
+        .search-bar button {
+            background: white;
+            border: none;
+            padding: 0 20px;
+            border-radius: 0 2px 2px 0;
+            cursor: pointer;
+            color: var(--primary);
+        }
+        
+        .user-actions {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .action-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: pointer;
+            position: relative;
+        }
+        
+        .action-item i {
+            font-size: 1.2rem;
+            margin-bottom: 3px;
+        }
+        
+        .action-item span {
+            font-size: 0.8rem;
+        }
+        
+        .cart-badge {
+            background: var(--secondary);
+            color: white;
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            position: absolute;
+            top: -5px;
+            right: -5px;
+        }
+        
+        .header-bottom {
+            background-color: white;
+            padding: 10px 0;
+            box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+        }
+        
+        .categories {
+            display: flex;
+            justify-content: space-between;
+            list-style: none;
+        }
+        
+        .categories li {
+            padding: 5px 10px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            color: var(--dark);
+            transition: color 0.3s;
+        }
+        
+        .categories li:hover {
+            color: var(--primary);
+        }
+        
+        /* Hero Carousel */
+        .carousel {
+            margin: 15px 0;
+            position: relative;
+            overflow: hidden;
+            border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .carousel-inner {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+        
+        .carousel-item {
+            min-width: 100%;
+            height: 350px;
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .carousel-controls {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            transform: translateY(-50%);
+        }
+        
+        .carousel-control {
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            margin: 0 15px;
+        }
+        
+        /* Products Section */
+        .section {
+            background: white;
+            margin: 20px 0;
+            border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+        
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .section-title {
+            font-size: 1.5rem;
+            color: var(--dark);
+            font-weight: 600;
+        }
+        
+        .view-all {
+            color: var(--primary);
+            font-weight: 500;
+            cursor: pointer;
+        }
+        
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 20px;
+        }
+        
+        .product-card {
+            border: 1px solid var(--border);
+            border-radius: 5px;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .product-image {
+            height: 200px;
+            width: 100%;
+            object-fit: cover;
+            background-color: #f5f5f5;
+        }
+        
+        .product-info {
+            padding: 15px;
+        }
+        
+        .product-title {
+            font-size: 1rem;
+            margin-bottom: 8px;
+            color: var(--dark);
+            height: 40px;
+            overflow: hidden;
+        }
+        
+        .product-brand {
+            font-size: 0.8rem;
+            color: #666;
+            margin-bottom: 5px;
+        }
+        
+        .product-rating {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            margin-bottom: 8px;
+        }
+        
+        .rating-stars {
+            color: var(--secondary);
+        }
+        
+        .rating-count {
+            color: #878787;
+            font-size: 0.8rem;
+        }
+        
+        .product-price {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+        
+        .current-price {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: var(--dark);
+        }
+        
+        .original-price {
+            font-size: 0.9rem;
+            color: #878787;
+            text-decoration: line-through;
+        }
+        
+        .discount {
+            color: var(--success);
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+        
+        .product-actions {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .btn {
+            flex: 1;
+            padding: 8px 0;
+            border: none;
+            border-radius: 3px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: var(--primary-dark);
+        }
+        
+        .btn-outline {
+            background: white;
+            color: var(--primary);
+            border: 1px solid var(--primary);
+        }
+        
+        .btn-outline:hover {
+            background: #f0f5ff;
+        }
+        
+        /* Store Info Section */
+        .store-info {
+            background: white;
+            margin: 20px 0;
+            border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .store-info h2 {
+            color: var(--primary);
+            margin-bottom: 15px;
+            font-size: 1.8rem;
+        }
+        
+        .store-info p {
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+        
+        .highlight {
+            color: var(--primary);
+            font-weight: 600;
+        }
+        
+        /* Footer */
+        .footer {
+            background: var(--dark);
+            color: white;
+            padding: 40px 0 20px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .footer-column h3 {
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            position: relative;
+            padding-bottom: 8px;
+        }
+        
+        .footer-column h3:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background: var(--secondary);
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 8px;
+        }
+        
+        .footer-column a {
+            color: #e0e0e0;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+        }
+        
+        .footer-column a:hover {
+            color: var(--secondary);
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .social-links a {
+            color: white;
+            font-size: 1.2rem;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #444;
+            font-size: 0.9rem;
+            color: #aaa;
+        }
+        
+        /* Responsive */
+        @media (max-width: 992px) {
+            .search-bar {
+                flex: 0 0 40%;
+            }
+            
+            .categories {
+                overflow-x: auto;
+                padding-bottom: 5px;
+            }
+            
+            .categories li {
+                white-space: nowrap;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .header-top {
+                flex-wrap: wrap;
+            }
+            
+            .logo {
+                order: 1;
+            }
+            
+            .search-bar {
+                order: 3;
+                flex: 0 0 100%;
+                max-width: 100%;
+                margin-top: 10px;
+            }
+            
+            .user-actions {
+                order: 2;
+            }
+            
+            .carousel-item {
+                height: 200px;
+            }
+            
+            .products-grid {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            }
+            
+            .product-title {
+                font-size: 0.9rem;
+                height: 36px;
+            }
+            
+            .logo-image {
+                height: 40px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-top">
+                <div class="logo">
+                    <img src="/abhay clothes logo/Abhayclothes logo.jpg" alt="Abhay Cloth House Logo" class="logo-image">
+                    <span>Abhay Cloth House</span>
+                </div>
+                
+                <div class="search-bar">
+                    <input type="text" placeholder="Search for products, brands and categories">
+                    <button><i class="fas fa-search"></i></button>
+                </div>
+                
+                <div class="user-actions">
+                    <div class="action-item">
+                        <i class="fas fa-user"></i>
+                        <span>Login</span>
+                    </div>
+                    <div class="action-item">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span>Cart</span>
+                        <div class="cart-badge">5</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="header-bottom">
+            <div class="container">
+                <ul class="categories">
+                    <li>Lehengas</li>
+                    <li>Sarees</li>
+                    <li>Kids Wear</li>
+                    <li>Men's Wear</li>
+                    <li>Women's Wear</li>
+                    <li>Party Wear</li>
+                    <li>Wedding Collection</li>
+                    <li>Offers</li>
+                </ul>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Carousel -->
+    <div class="container">
+        <div class="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item" style="background-image: url('/abhay clothes.jpg')"></div>
+                <div class="carousel-item" style="background-image: url('/clothes.jpg')"></div>
+                <div class="carousel-item" style="background-image: url('/रेड ट्रेडिशनल बनारसी साड़ी.jpg')"></div>
+            </div>
+            <div class="carousel-controls">
+                <button class="carousel-control prev"><i class="fas fa-chevron-left"></i></button>
+                <button class="carousel-control next"><i class="fas fa-chevron-right"></i></button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Store Info Section -->
+    <div class="container">
+        <div class="store-info">
+            <h2>Abhay Cloth House</h2>
+            <p><span class="highlight">Location:</span> Bhikharipur Bazar, District-Mau, Uttar Pradesh</p>
+            <p><span class="highlight">Time:</span> From 10:00 AM onwards</p>
+            <p><span class="highlight">Specialty:</span> Huge range of Lehengas, Sarees, and Kids' wear available</p>
+        </div>
+    </div>
+
+    <!-- Designer Lehengas (10 Types) -->
+    <div class="container">
+        <div class="section">
+            <div class="section-header">
+                <h2 class="section-title">Designer Zari Work Lehengas </h2>
+                <span class="view-all">View All 25</span>
+            </div>
+            
+            <div class="products-grid">
+                <!-- Lehenga 1 -->
+                <div class="product-card">
+                    <img src="/रॉयल ब्लू जरी लेहेंगा.jpeg" alt="Lehenga" class="product-image">
+                    <div class="product-info">
+                        <div class="product-brand">Manish Malhotra</div>
+                        <div class="product-title">Royal Blue Zari Lehenga</div>
+                        <div class="product-rating">
+                            <div class="rating-stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                            </div>
+                            <span class="rating-count">(1,245)</span>
+                        </div>
+                        <div class="product-price">
+                            <span class="current-price">₹ 4,299</span>
+                            <span class="original-price">₹ 6,999</span>
+                            <span class="discount">39% OFF</span>
+                        </div>
+                        <div class="product-actions">
+                            <button class="btn btn-primary">Buy Now</button>
+                            <button class="btn btn-outline">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Lehenga 2 -->
+                <div class="product-card">
+                    <img src="/रेड वेडिंग लेहेंगा.jpeg" alt="Lehenga" class="product-image">
+                    <div class="product-info">
+                        <div class="product-brand">Sabyasachi</div>
+                        <div class="product-title">Red Wedding Lehenga</div>
+                        <div class="product-rating">
+                            <div class="rating-stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                            <span class="rating-count">(2,112)</span>
+                        </div>
+                        <div class="product-price">
+                            <span class="current-price">₹ 5,499</span>
+                            <span class="original-price">₹ 8,999</span>
+                            <span class="discount">39% OFF</span>
+                        </div>
+                        <div class="product-actions">
+                            <button class="btn btn-primary">Buy Now</button>
+                            <button class="btn btn-outline">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Lehenga 3 -->
+                <div class="product-card">
+                    <img src="/ग्रीन एम्ब्रॉयडरी लेहेंगा.jpeg" alt="Lehenga" class="product-image">
+                    <div class="product-info">
+                        <div class="product-brand">Tarun Tahiliani</div>
+                        <div class="product-title">Green Embroidery Lehenga</div>
+                        <div class="product-rating">
+                            <div class="rating-stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <span class="rating-count">(3,421)</span>
+                        </div>
+                        <div class="product-price">
+                            <span class="current-price">₹ 3,999</span>
+                            <span class="original-price">₹ 6,499</span>
+                            <span class="discount">38% OFF</span>
+                        </div>
+                        <div class="product-actions">
+                            <button class="btn btn-primary">Buy Now</button>
+                            <button class="btn btn-outline">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Lehenga 4 -->
+                <div class="product-card">
+                    <img src="/पिंक पार्टी वियर लेहेंगा.jpeg" alt="Lehenga" class="product-image">
+                    <div class="product-info">
+                        <div class="product-brand">Anita Dongre</div>
+                        <div class="product-title">Pink Party Wear Lehenga</div>
+                        <div class="product-rating">
+                            <div class="rating-stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                            <span class="rating-count">(1,876)</span>
+                        </div>
+                        <div class="product-price">
+                            <span class="current-price">₹ 2,799</span>
+                            <span class="original-price">₹ 4,499</span>
+                            <span class="discount">38% OFF</span>
+                        </div>
+                        <div class="product-actions">
+                            <button class="btn btn-primary">Buy Now</button>
+                            <button class="btn btn-outline">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Lehenga 5 -->
+                <div class="product-card">
+                    <img src="/गोल्डन जरी वर्क लेहेंगा.jpg" alt="Lehenga" class="product-image">
+                    <div class="product-info">
+                        <div class="product-brand">Ritu Kumar</div>
+                        <div class="product-title">Golden Zari Work Lehenga</div>
+                        <div class="product-rating">
+                            <div class="rating-stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                            </div>
+                            <span class="rating-count">(2,543)</span>
+                        </div>
+                        <div class="product-price">
+                            <span class="current-price">₹ 6,299</span>
+                            <span class="original-price">₹ 9,999</span>
+                            <span class="discount">37% OFF</span>
+                        </div>
+                        <div class="product-actions">
+                            <button class="btn btn-primary">Buy Now</button>
+                            <button class="btn btn-outline">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Lehenga 6 -->
+                <div class="product-card">
+                    <img src="/पर्पल सीक्विन लेहेंगा.jpg" alt="Lehenga" class="product-image">
+                    <div class="product-info">
+                        <div class="product-brand">NeLLy Wadhwani</div>
+                        <div class="product-title">Purple Sequin Lehenga</div>
+                        <div class="product-rating">
+                            <div class="rating-stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                            <span class="rating-count">(1,654)</span>
+                        </div>
+                        <div class="product-price">
+                            <span class="current-price">₹ 4,899</span>
+                            <span class="original-price">₹ 7,499</span>
+                            <span class="discount">35% OFF</span>
+                        </div>
+                        <div class="product-actions">
+                            <button class="btn btn-primary">Buy Now</button>
+                            <button class="btn btn-outline">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Banarasi Silk Sarees  -->
+    <div class="container">
+        <div class="section">
+            <div class="section-header">
+                <h2 class="section-title">Banarasi Silk Sarees with Blouse </h2>
+                <span class="view-all">View All 18</span>
+            </div>
+            
+            <div class="products-grid">
+                <!-- Saree 1 -->
+                <div class="product-card">
+                    <img src="/1 पर्पल बनारसी सिल्क साड़ी.jpg" alt="Saree" class="product-image">
+                    <div class="product-info">
+                        <div class="product-brand">Sabyasachi</div>
+                        <div class="product-title">Purple Banarasi Silk Saree</div>
+                        <div class="product-rating">
+                            <div class="rating-stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                            </div>
+                            <span class="rating-count">(1,245)</span>
+                        </div>
+                        <div class="product-price">
+                            <span class="current-price">₹ 3,299</span>
+                            <span class="original-price">₹ 5,499</span>
+                            <span class="discount">40% OFF</span>
+                        </div>
+                        <div class="product-actions">
+                            <button class="btn btn-primary">Buy Now</button>
+                            <button class="btn btn-outline">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Saree 2 -->
+                <div class="product-card">
+                    <img src="/1 गोल्डन जरी बनारसी साड़ी.jpg" alt="Saree" class="product-image">
+                    <div class="product-info">
+                        <div class="product-brand">Rohit Bal</div>
+                        <div class="product-title">Maroon Banarasi Silk Saree</div>
+                        <div class="product-rating">
+                            <div class="rating-stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                            <span class="rating-count">(2,112)</span>
+                        </div>
+                        <div class="product-price">
+                            <span class="current-price">₹ 4,599</span>
+                            <span class="original-price">₹ 7,499</span>
+                            <span class="discount">39% OFF</span>
+                        </div>
+                        <div class="product-actions">
+                            <button class="btn btn-primary">Buy Now</button>
+                            <button class="btn btn-outline">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Saree 3 -->
+                <div class="product-card">
+                    <img src="/1 रेड ट्रेडिशनल बनारसी साड़ी.jpg" alt="Saree" class="product-image">
+                    <div class="product-info">
+                        <div class="product-brand">Amrita Singh</div>
+                        <div class="product-title">Red Banarasi Silk Saree</div>
+                        <div class="product-rating">
+                            <div class="rating-stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <span class="rating-count">(3,421)</span>
+                        </div>
+                        <div class="product-price">
+                            <span class="current-price">₹ 3,899</span>
+                            <span class="original-price">₹ 6,299</span>
+                            <span class="discount">38% OFF</span>
+                        </div>
+                        <div class="product-actions">
+                            <button class="btn btn-primary">Buy Now</button>
+                            <button class="btn btn-outline">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Saree 4 -->
+                <div class="product-card">
+                    <img src="/1 पिंक बनारसी सिल्क साड़ी.jpg" alt="Saree" class="product-image">
+                    <div class="product-info">
+                        <div class="product-brand">Shanti Nagpur</div>
+                        <div class="product-title">Pink Banarasi Silk Saree</div>
+                        <div class="product-rating">
+                            <div class="rating-stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                            <span class="rating-count">(1,876)</span>
+                        </div>
+                        <div class="product-price">
+                            <span class="current-price">₹ 2,999</span>
+                            <span class="original-price">₹ 4,899</span>
+                            <span class="discount">39% OFF</span>
+                        </div>
+                        <div class="product-actions">
+                            <button class="btn btn-primary">Buy Now</button>
+                            <button class="btn btn-outline">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Saree 5 -->
+                <div class="product-card">
+                    <img src="/1 ब्लू जियोमेट्रिक बनारसी साड़ी.jpg" alt="Saree" class="product-image">
+                    <div class="product-info">
+                        <div class="product-brand">Bombay Silk</div>
+                        <div class="product-title">Blue Banarasi Silk Saree</div>
+                        <div class="product-rating">
+                            <div class="rating-stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                            </div>
+                            <span class="rating-count">(2,543)</span>
+                        </div>
+                        <div class="product-price">
+                            <span class="current-price">₹ 3,599</span>
+                            <span class="original-price">₹ 5,999</span>
+                            <span class="discount">40% OFF</span>
+                        </div>
+                        <div class="product-actions">
+                            <button class="btn btn-primary">Buy Now</button>
+                            <button class="btn btn-outline">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Saree 6 -->
+                <div class="product-card">
+                    <img src="/1.ग्रीन प्रिंटेड बनारसी साड़ी.jpg" alt="Saree" class="product-image">
+                    <div class="product-info">
+                        <div class="product-brand">Kolkata Silk</div>
+                        <div class="product-title">Green Banarasi Silk Saree</div>
+                        <div class="product-rating">
+                            <div class="rating-stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                            <span class="rating-count">(1,654)</span>
+                        </div>
+                        <div class="product-price">
+                            <span class="current-price">₹ 2,799</span>
+                            <span class="original-price">₹ 4,499</span>
+                            <span class="discount">38% OFF</span>
+                        </div>
+                        <div class="product-actions">
+                            <button class="btn btn-primary">Buy Now</button>
+                            <button class="btn btn-outline">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mens Kurta Pajama -->
+    <div class="container">
+        <div class="section">
+            <div class="section-header">
+                <h2 class="section-title">Men's Embroidered Kurta Pajama </h2>
+                <span class="view-all">View All 22</span>
+            </div>
+            
+            <div class="products-grid">
+                <!-- Kurta 1 -->
+                <div class="product-card">
+                    <img src="/Men's Embroidered Kurta Pajama/Embroidered & Sequin Kurta Pyjama With Dupatta.jpg" alt="Kurta" class="product-image">
+                    <div class="product-info">
+                        <div class="product-brand">Fabindia</div>
+                        <div class="product-title">Embroidered & Sequin Kurta Pyjama With Dupatta</div>
+                        <div class="product-rating">
+                            <div class="rating-stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                            </div>
+                            <span class="rating-count">(1,245)</span>
+                        </div>
+                        <div class="product-price">
+                            <span class="current-price">₹ 1,299</span>
+                            <span class="original-price">₹ 2,199</span>
+                            <span class="discount">41% OFF</span>
+                        </div>
+                        <div class="product-actions">
+                            <button class="btn btn-primary">Buy Now</button>
+                            <button class="btn btn-outline">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Kurta 2 -->
+                <div class="product-card">
+                    <img src="/Men's Embroidered Kurta Pajama/Blue Printed Kurta Pajama.jpg" alt="Kurta" class="product-image">
+                    <div class="product-info">
+                        <div class="product-brand">Mufti</div>
+                        <div class="product-title">Blue Printed Kurta </div>
+                        <div class="product-rating">
+                            <div class="rating-stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                            <span class="rating-count">(2,112)</span>
+                        </div>
+                        <div class="product-price">
+                            <span class="current-price">₹ 1,599</span>
+                            <span class="original-price">₹ 2,699</span>
+                            <span class="discount">41% OFF</span>
+                        </div>
+                        <div class="product-actions">
+                            <button class="btn btn-primary">Buy Now</button>
+                            <button class="btn btn-outline">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Kurta 3 -->
+                <div class="product-card">
+                    <img src="/Men's Embroidered Kurta Pajama/Maroon Silk Kurta Set.jpg" alt="Kurta" class="product-image">
+                    <div class="product-info">
+                        <div class="product-brand">Bombay Dyeing</div>
+                        <div class="product-title">Maroon Silk Kurta Set</div>
+                        <div class="product-rating">
+                            <div class="rating-stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <span class="rating-count">(3,421)</span>
+                        </div>
+                        <div class="product-price">
+                            <span class="current-price">₹ 2,299</span>
+                            <span class="original-price">₹ 3,799</span>
+                            <span class="discount">39% OFF</span>
+                        </div>
+                        <div class="product-actions">
+                            <button class="btn btn-primary">Buy Now</button>
+                            <button class="btn btn-outline">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Kurta 4 -->
+                <div class="product-card">
+                    <img src="/Men's Embroidered Kurta Pajama/Grey Cotton Kurta Pajama.jpg" alt="Kurta" class="product-image">
+                    <div class="product-info">
+                        <div class="product-brand">Benetton</div>
+                        <div class="product-title">Grey Cotton Kurta Pajama</div>
+                        <div class="product-rating">
+                            <div class="rating-stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                            <span class="rating-count">(1,876)</span>
+                        </div>
+                        <div class="product-price">
+                            <span class="current-price">₹ 1,199</span>
+                            <span class="original-price">₹ 1,999</span>
+                            <span class="discount">40% OFF</span>
+                        </div>
+                        <div class="product-actions">
+                            <button class="btn btn-primary">Buy Now</button>
+                            <button class="btn btn-outline">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Kurta 5 -->
+                <div class="product-card">
+                    <img src="/Men's Embroidered Kurta Pajama/Black & Gold Kurta.jpg" alt="Kurta" class="product-image">
+                    <div class="product-info">
+                        <div class="product-brand">Park Avenue</div>
+                        <div class="product-title">Black & Gold Kurta</div>
+                        <div class="product-rating">
+                            <div class="rating-stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                            </div>
+                            <span class="rating-count">(2,543)</span>
+                        </div>
+                        <div class="product-price">
+                            <span class="current-price">₹ 1,899</span>
+                            <span class="original-price">₹ 3,199</span>
+                            <span class="discount">41% OFF</span>
+                        </div>
+                        <div class="product-actions">
+                            <button class="btn btn-primary">Buy Now</button>
+                            <button class="btn btn-outline">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Kurta 6 -->
+                <div class="product-card">
+                    <img src="/Men's Embroidered Kurta Pajama/Off-White Linen Kurta.jpg" alt="Kurta" class="product-image">
+                    <div class="product-info">
+                        <div class="product-brand">Raymond</div>
+                        <div class="product-title">Off-White Linen Kurta</div>
+                        <div class="product-rating">
+                            <div class="rating-stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                            <span class="rating-count">(1,654)</span>
+                        </div>
+                        <div class="product-price">
+                            <span class="current-price">₹ 1,499</span>
+                            <span class="original-price">₹ 2,499</span>
+                            <span class="discount">40% OFF</span>
+                        </div>
+                        <div class="product-actions">
+                            <button class="btn btn-primary">Buy Now</button>
+                            <button class="btn btn-outline">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Silk Sarees Section -->
+    <div class="container">
+        <div class="section">
+            <div class="section-header">
+                <h2 class="section-title">Silk Sarees </h2>
+                <span class="view-all">View All 20</span>
+            </div>
+            
+            <div class="products-grid">
+                <!-- Saree 1 -->
+                <div class="product-card">
+                    <img src="/Silk sadi/Blooming Maroon Soft Silk Saree With Vivacious Blouse.jpg" alt="Saree" class="product-image">
+                    <div class="product-info">
+                        <div class="product-brand">Nalli Silks</div>
+                        <div class="product-title">Blooming Maroon Soft Silk Saree With Vivacious Blouse </div>
+                        <div class="product-rating">
+                            <div class="rating-stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                            </div>
+                            <span class="rating-count">(1,245)</span>
+                        </div>
+                        <div class="product-price">
+                            <span class="current-price">₹ 899</span>
+                            <span class="original-price">₹ 1,499</span>
+                            <span class="discount">40% OFF</span>
+                        </div>
+                        <div class="product-actions">
+                            <button class="btn btn-primary">Buy Now</button>
+                            <button class="btn btn-outline">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Saree 2 -->
+                <div class="product-card">
+                    <img src="/Silk sadi/Confounding Black Soft Silk Saree With Snappy Blouse.jpg" alt="Saree" class="product-image">
+                    <div class="product-info">
+                        <div class="product-brand">Kanchipuram</div>
+                        <div class="product-title">Confounding Black Soft Silk Saree With Snappy Blouse </div>
+                        <div class="product-rating">
+                            <div class="rating-stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                            <span class="rating-count">(2,112)</span>
+                        </div>
+                        <div class="product-price">
+                            <span class="current-price">₹ 1,199</span>
+                            <span class="original-price">₹ 1,999</span>
+                            <span class="discount">40% OFF</span>
+                        </div>
+                        <div class="product-actions">
+                            <button class="btn btn-primary">Buy Now</button>
+                            <button class="btn btn-outline">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+                
+                                <!-- Saree 3 -->
+                <div class="product-card">
+                    <img src="/Silk sadi/Epiphany Maroon Soft Silk Saree With Forbearance Blouse.jpg" alt="Saree" class="product-image">
+                    <div class="product-info">
+                        <div class="product-brand">Nalli Silks</div>
+                        <div class="product-title">Blooming Maroon Soft Silk Saree With Vivacious Blouse </div>
+                        <div class="product-rating">
+                            <div class="rating-stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                            </div>
+                            <span class="rating-count">(1,245)</span>
+                        </div>
+                        <div class="product-price">
+                            <span class="current-price">₹ 899</span>
+                            <span class="original-price">₹ 1,499</span>
+                            <span class="discount">40% OFF</span>
+                        </div>
+                        <div class="product-actions">
+                            <button class="btn btn-primary">Buy Now</button>
+                            <button class="btn btn-outline">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Saree 4 -->
+                <div class="product-card">
+                    <img src="/Silk sadi/Felicitous Orange Soft Banarasi Silk Saree With Enchanting Blouse.jpg" alt="Saree" class="product-image">
+                    <div class="product-info">
+                        <div class="product-brand">Kanchipuram</div>
+                        <div class="product-title">Felicitous Orange Soft Banarasi Silk Saree With Enchanting Blouse</div>
+                        <div class="product-rating">
+                            <div class="rating-stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                            <span class="rating-count">(2,112)</span>
+                        </div>
+                        <div class="product-price">
+                            <span class="current-price">₹ 1,199</span>
+                            <span class="original-price">₹ 1,999</span>
+                            <span class="discount">40% OFF</span>
+                        </div>
+                        <div class="product-actions">
+                            <button class="btn btn-primary">Buy Now</button>
+                            <button class="btn btn-outline">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="product-card">
+                    <img src="/Silk sadi/Seraglio Green Cotton Silk Saree With Magnificat Blouse.jpg" alt="Saree" class="product-image">
+                    <div class="product-info">
+                        <div class="product-brand">Pothys</div>
+                        <div class="product-title">Seraglio Green Cotton Silk Saree With Magnificat Blouse</div>
+                        <div class="product-rating">
+                            <div class="rating-stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <span class="rating-count">(3,421)</span>
+                        </div>
+                        <div class="product-price">
+                            <span class="current-price">₹ 1,499</span>
+                            <span class="original-price">₹ 2,499</span>
+                            <span class="discount">40% OFF</span>
+                        </div>
+                        <div class="product-actions">
+                            <button class="btn btn-primary">Buy Now</button>
+                            <button class="btn btn-outline">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>  
+            
+                <div class="product-card">
+                    <img src="/Silk sadi/Vestigial Mustard Soft Silk Saree With Adorable Blouse.jpg" alt="Saree" class="product-image">
+                    <div class="product-info">
+                        <div class="product-brand">RMKV</div>
+                        <div class="product-title">Vestigial Mustard Soft Silk Saree With Adorable Blouse
+            </div>
+                        <div class="product-rating">
+                            <div class="rating-stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                            <span class="rating-count">(1,876)</span>
+                        </div>
+                        <div class="product-price">
+                            <span class="current-price">₹ 1,099</span>
+                            <span class="original-price">₹ 1,799</span>
+                            <span class="discount">39% OFF</span>
+                        </div>
+                        <div class="product-actions">
+                            <button class="btn btn-primary">Buy Now</button>
+                            <button class="btn btn-outline">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Abhay Cloth House</h3>
+                    <p>We have a huge range of Lehengas, Sarees, and Kids' wear available. Welcome to Abhay Cloth House.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Customer Support</h3>
+                    <ul>
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Returns & Refunds</a></li>
+                        <li><a href="#">Shipping Info</a></li>
+                        <li><a href="#">FAQs</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Account</h3>
+                    <ul>
+                        <li><a href="#">Login / Sign Up</a></li>
+                        <li><a href="#">Order History</a></li>
+                        <li><a href="#">Wishlist</a></li>
+                        <li><a href="#">Newsletter</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Contact Us</h3>
+                    <ul>
+                        <li>📍 Bhikharipur Bazar, District-Mau, Uttar Pradesh</li>
+                        <li>🕒 10:00 AM to 9:00 PM</li>
+                        <li>📞 +91 XXXXX XXXXX</li>
+                        <li>✉️ info@abhayclothhouse.com</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>© 2023 Abhay Cloth House. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Carousel functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const carouselInner = document.querySelector('.carousel-inner');
+            const carouselItems = document.querySelectorAll('.carousel-item');
+            const prevButton = document.querySelector('.carousel-control.prev');
+            const nextButton = document.querySelector('.carousel-control.next');
+            let currentIndex = 0;
+            
+            function updateCarousel() {
+                carouselInner.style.transform = `translateX(-${currentIndex * 100}%)`;
+            }
+            
+            nextButton.addEventListener('click', function() {
+                currentIndex = (currentIndex + 1) % carouselItems.length;
+                updateCarousel();
+            });
+            
+            prevButton.addEventListener('click', function() {
+                currentIndex = (currentIndex - 1 + carouselItems.length) % carouselItems.length;
+                updateCarousel();
+            });
+            
+            // Auto slide every 5 seconds
+            setInterval(function() {
+                currentIndex = (currentIndex + 1) % carouselItems.length;
+                updateCarousel();
+            }, 5000);
+            
+            // Add to cart functionality
+            const addToCartButtons = document.querySelectorAll('.btn-outline');
+            
+            addToCartButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const productCard = this.closest('.product-card');
+                    const productTitle = productCard.querySelector('.product-title').textContent;
+                    const productBrand = productCard.querySelector('.product-brand').textContent;
+                    
+                    alert(`${productBrand} - ${productTitle} has been added to your cart!`);
+                    
+                    // Update cart badge
+                    const cartBadge = document.querySelector('.cart-badge');
+                    let currentCount = parseInt(cartBadge.textContent);
+                    cartBadge.textContent = currentCount + 1;
+                });
+            });
+            
+            // Buy now functionality
+            const buyNowButtons = document.querySelectorAll('.btn-primary');
+            
+            buyNowButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const productCard = this.closest('.product-card');
+                    const productTitle = productCard.querySelector('.product-title').textContent;
+                    const productBrand = productCard.querySelector('.product-brand').textContent;
+                    
+                    alert(`Thank you for purchasing ${productBrand} - ${productTitle}! Your order has been confirmed.`);
+                });
+            });
+            
+            // View All functionality
+            const viewAllButtons = document.querySelectorAll('.view-all');
+            
+            viewAllButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const sectionTitle = this.closest('.section-header').querySelector('.section-title').textContent;
+                    alert(`Thank you for viewing all ${sectionTitle}! We will launch this feature soon.`);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
